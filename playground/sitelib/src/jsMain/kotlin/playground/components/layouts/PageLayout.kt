@@ -26,3 +26,20 @@ fun PageLayout(title: String, content: @Composable () -> Unit) {
         content()
     }
 }
+
+@Composable
+fun PageLayout(content: @Composable () -> Unit) {
+
+    LaunchedEffect(title) {
+        document.title = title
+    }
+
+    Column(
+        modifier = Modifier.fillMaxSize().textAlign(TextAlign.Center),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        NavHeader()
+        H1 { Text(title) }
+        content()
+    }
+}
