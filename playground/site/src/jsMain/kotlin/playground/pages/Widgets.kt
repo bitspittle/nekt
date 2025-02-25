@@ -16,6 +16,7 @@ import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.compose.ui.thenIf
 import com.varabyte.kobweb.compose.ui.toAttrs
 import com.varabyte.kobweb.core.Page
+import com.varabyte.kobweb.navigation.OpenLinkStrategy
 import com.varabyte.kobweb.silk.components.disclosure.Tabs
 import com.varabyte.kobweb.silk.components.display.Callout
 import com.varabyte.kobweb.silk.components.display.CalloutType
@@ -55,10 +56,10 @@ import com.varabyte.kobweb.silk.components.icons.DownloadIcon
 import com.varabyte.kobweb.silk.components.icons.ExclaimIcon
 import com.varabyte.kobweb.silk.components.icons.HamburgerIcon
 import com.varabyte.kobweb.silk.components.icons.IndeterminateIcon
-import com.varabyte.kobweb.silk.components.icons.MinusIcon
-import com.varabyte.kobweb.silk.components.icons.MoonIcon
 import com.varabyte.kobweb.silk.components.icons.InfoIcon
 import com.varabyte.kobweb.silk.components.icons.LightbulbIcon
+import com.varabyte.kobweb.silk.components.icons.MinusIcon
+import com.varabyte.kobweb.silk.components.icons.MoonIcon
 import com.varabyte.kobweb.silk.components.icons.PlusIcon
 import com.varabyte.kobweb.silk.components.icons.QuestionIcon
 import com.varabyte.kobweb.silk.components.icons.QuoteIcon
@@ -73,6 +74,7 @@ import com.varabyte.kobweb.silk.components.icons.fa.FaUser
 import com.varabyte.kobweb.silk.components.icons.fa.IconStyle
 import com.varabyte.kobweb.silk.components.layout.SimpleGrid
 import com.varabyte.kobweb.silk.components.layout.numColumns
+import com.varabyte.kobweb.silk.components.navigation.Link
 import com.varabyte.kobweb.silk.components.overlay.KeepPopupOpenStrategy
 import com.varabyte.kobweb.silk.components.overlay.Popover
 import com.varabyte.kobweb.silk.components.overlay.PopupPlacement
@@ -486,6 +488,15 @@ fun WidgetsPage() {
                             placement = PopupPlacement.Right,
                             keepOpenStrategy = manualStrat
                         )
+                    }
+
+                    Column(Modifier.gap(1.cssRem)) { // Should close after switching back to the tab
+                        Link(
+                            "https://example.com",
+                            "Click to open a new tab",
+                            openExternalLinksStrategy = OpenLinkStrategy.IN_NEW_TAB
+                        )
+                        Tooltip(ElementTarget.PreviousSibling, "tooltip", placement = PopupPlacement.Right)
                     }
 
                     Box(
